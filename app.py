@@ -8,6 +8,8 @@ from gradientai import Gradient
 # Set up environment variables for Gradient
 os.environ['GRADIENT_ACCESS_TOKEN'] = "6AckMoD1WqxRCyUGHviJEjeUcBJX7vj7"
 os.environ['GRADIENT_WORKSPACE_ID'] = "61f2afdf-aa21-4570-b129-28abb454635d_workspace"
+huggingface_token = "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"
+login(token=huggingface_token)
 
 st.set_page_config(
     page_title="GenAI Magician",
