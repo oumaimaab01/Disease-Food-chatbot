@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Streamlit Application for Gemma Model"""
-pip install huggingface_hub
 
 import os
 from PIL import Image
