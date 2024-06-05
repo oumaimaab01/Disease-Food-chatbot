@@ -1,2 +1,7 @@
 huggingface_hub
 transformers
+streamlit
+pillow
+keras
+keras_nlp
+torch  
