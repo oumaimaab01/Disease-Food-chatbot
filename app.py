@@ -55,9 +55,10 @@ def generate_text_gpt2(prompt):
     outputs = gpt2_model.generate(
         inputs, 
         max_length=150, 
-        temperature=0.7, 
         num_return_sequences=1, 
         no_repeat_ngram_size=2,
+        do_sample=True  
+
     )
     text = gpt2_tokenizer.decode(outputs[0], skip_special_tokens=True)
     return text
@@ -67,9 +68,10 @@ def generate_text_llama1(prompt, model2, tokenizer2):
     outputs = model2.generate(
         inputs, 
         max_length=150, 
-        temperature=0.7, 
         num_return_sequences=1, 
         no_repeat_ngram_size=2,
+        do_sample=True  
+
     )
     text = tokenizer2.decode(outputs[0], skip_special_tokens=True)
     return text
@@ -79,9 +81,10 @@ def generate_text_llama2(prompt, model3, tokenizer3):
     outputs = model3.generate(
         inputs, 
         max_length=150, 
-        temperature=0.7, 
         num_return_sequences=1, 
         no_repeat_ngram_size=2,
+        do_sample=True  
+
     )
     text = tokenizer3.decode(outputs[0], skip_special_tokens=True)
     return text
@@ -90,9 +93,10 @@ def generate_text_gemma(prompt, model4, tokenizer4):
     outputs = model4.generate(
         inputs, 
         max_length=150, 
-        temperature=0.7, 
         num_return_sequences=1, 
         no_repeat_ngram_size=2,
+        do_sample=True  
+
     )
     text = tokenizer4.decode(outputs[0], skip_special_tokens=True)
     return text
