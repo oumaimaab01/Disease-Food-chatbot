@@ -5,3 +5,7 @@ pillow
 keras
 keras_nlp
 torch  
+tensorflow
+nvidia-tensorrt
+transformers
+streamlit
