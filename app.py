@@ -99,7 +99,7 @@ def generate_text_gemma(prompt, model4, tokenizer4):
 
 
 # Load images
-main_image = Image.open('C:/Users/hp/Desktop/Streamlit/static/main_banner.png')
+main_image = Image.open('static/main_banner.png')
 
 # Set sidebar images and select box
 format_type = st.sidebar.selectbox('Choose your GenAI magician 😉', ["GPT-2", "Llama-2-7b-chat-finetuned", "Llama-2-7b-chat-hf", "Gemma-2b-it"])
