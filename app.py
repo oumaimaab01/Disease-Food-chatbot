@@ -4,7 +4,6 @@ import streamlit as st
 from huggingface_hub import login
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from gradientai import Gradient
-from textblob import TextBlob
 
 # Set up environment variables for Gradient
 os.environ['GRADIENT_ACCESS_TOKEN'] = "6AckMoD1WqxRCyUGHviJEjeUcBJX7vj7"
