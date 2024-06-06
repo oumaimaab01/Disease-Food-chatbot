@@ -10,3 +10,4 @@ nvidia-tensorrt
 transformers
 streamlit
 gradientai
+python-dotenv
