@@ -66,11 +66,7 @@ def get_response_from_llama2(prompt):
 
 # Load images
 main_image_path = Image.open('static/main_banner.png')
-if os.path.exists(main_image_path):
-    main_image = Image.open(main_image_path)
-    st.image(main_image, use_column_width=True)
-else:
-    st.warning(f"L'image du banner ne se trouve pas à {main_image_path}.")
+
 # Set sidebar images and select box
 format_type = st.sidebar.selectbox('Choose your GenAI magician 😉', ["GPT-2", "Gemma-2b-it", "llama2-7b-chat"])
 
