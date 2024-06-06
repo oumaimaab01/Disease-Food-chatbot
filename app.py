@@ -5,6 +5,7 @@ import streamlit as st
 from huggingface_hub import login
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from gradientai import Gradient
+import time
 
 # Configurer la page Streamlit avant toute autre utilisation de Streamlit
 st.set_page_config(
@@ -32,14 +33,21 @@ def load_gpt2_model():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     return model, tokenizer
 
-# Load Gemma model and tokenizer
+# Load Gemma model and tokenizer with retry logic
 @st.cache(allow_output_mutation=True)
 def load_gemma_model(token):
     model_name = "google/gemma-2b-it"
     login(token)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    return model, tokenizer
+    for attempt in range(3):  # Retry up to 3 times
+        try:
+            model = AutoModelForCausalLM.from_pretrained(model_name)
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+            return model, tokenizer
+        except Exception as e:
+            if attempt < 2:  # Don't sleep on the last attempt
+                time.sleep(5)  # Wait for 5 seconds before retrying
+            else:
+                raise e
 
 def generate_text_gpt2(prompt, model, tokenizer):
     inputs = tokenizer.encode(prompt, return_tensors="pt")
