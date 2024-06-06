@@ -1,11 +1,21 @@
 import os
+from dotenv import load_dotenv
 from PIL import Image
 import streamlit as st
 from huggingface_hub import login
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from gradientai import Gradient
 
-# Set up environment variables for Gradient
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Accéder aux variables d'environnement
+gradient_access_token = os.getenv('GRADIENT_ACCESS_TOKEN')
+gradient_workspace_id = os.getenv('GRADIENT_WORKSPACE_ID')
+
+print(f"Gradient Access Token: {gradient_access_token}")
+print(f"Gradient Workspace ID: {gradient_workspace_id}")
 
 
 st.set_page_config(
