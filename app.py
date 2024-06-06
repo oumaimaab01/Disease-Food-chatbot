@@ -6,6 +6,13 @@ from huggingface_hub import login
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from gradientai import Gradient
 
+st.set_page_config(
+    page_title="GenAI Magician",
+    page_icon="✨",
+    layout="centered",
+    initial_sidebar_state="auto",
+)
+
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -28,12 +35,6 @@ if token:
         st.error(f"Login failed: {e}")
         st.stop()
         
-st.set_page_config(
-    page_title="GenAI Magician",
-    page_icon="✨",
-    layout="centered",
-    initial_sidebar_state="auto",
-)
 
 # Load GPT-2 model and tokenizer
 @st.cache_resource
