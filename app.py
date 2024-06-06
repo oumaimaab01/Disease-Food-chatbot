@@ -17,6 +17,10 @@ gradient_workspace_id = os.getenv('GRADIENT_WORKSPACE_ID')
 print(f"Gradient Access Token: {gradient_access_token}")
 print(f"Gradient Workspace ID: {gradient_workspace_id}")
 
+# Obtenir le token depuis le fichier .env (pour le développement local)
+local_token = os.getenv('HUGGING_FACE_TOKEN')
+
+# Entrée du token par l'utilisateur
 token = st.text_input("Hugging Face Token", type="password", value=local_token if local_token else "")
 
 if token:
