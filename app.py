@@ -17,7 +17,16 @@ gradient_workspace_id = os.getenv('GRADIENT_WORKSPACE_ID')
 print(f"Gradient Access Token: {gradient_access_token}")
 print(f"Gradient Workspace ID: {gradient_workspace_id}")
 
+token = st.text_input("Hugging Face Token", type="password", value=local_token if local_token else "")
 
+if token:
+    try:
+        login(token)  # Remplacez par la fonction appropriée pour vous connecter à Hugging Face
+        st.success("Successfully logged in to Hugging Face")
+    except Exception as e:
+        st.error(f"Login failed: {e}")
+        st.stop()
+        
 st.set_page_config(
     page_title="GenAI Magician",
     page_icon="✨",
