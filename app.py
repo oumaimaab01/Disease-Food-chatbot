@@ -70,6 +70,10 @@ main_image_path = Image.open('static/main_banner.png')
 # Set sidebar images and select box
 format_type = st.sidebar.selectbox('Choose your GenAI magician 😉', ["GPT-2", "Gemma-2b-it", "llama2-7b-chat"])
 
+
+# Set main image and title
+st.image(main_image, use_column_width='auto')
+
 # Set the title dynamically based on the selected model
 if format_type == "GPT-2":
     st.title("📄 GPT-2")
