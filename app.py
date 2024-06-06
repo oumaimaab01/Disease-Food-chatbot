@@ -24,19 +24,8 @@ gradient_workspace_id = os.getenv('GRADIENT_WORKSPACE_ID')
 print(f"Gradient Access Token: {gradient_access_token}")
 print(f"Gradient Workspace ID: {gradient_workspace_id}")
 
-st.write("Enter your Hugging Face token to authenticate.")
-token = st.text_input("Hugging Face Token", type="password")
-
-if token:
-    try:
-        login(token)
-        st.success("Successfully logged in to Hugging Face")
-    except Exception as e:
-        st.error(f"Login failed: {e}")
-        st.stop()
-
 # Load GPT-2 model and tokenizer
-@st.cache_resource
+@st.cache(allow_output_mutation=True)
 def load_gpt2_model():
     model_name = "openai-community/gpt2"
     model = AutoModelForCausalLM.from_pretrained(model_name)
@@ -44,11 +33,12 @@ def load_gpt2_model():
     return model, tokenizer
 
 # Load Gemma model and tokenizer
-@st.cache_resource
-def load_gemma_model():
+@st.cache(allow_output_mutation=True)
+def load_gemma_model(token):
     model_name = "google/gemma-2b-it"
-    model = AutoModelForCausalLM.from_pretrained(model_name, progress_bar=False)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, progress_bar=False)
+    login(token)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     return model, tokenizer
 
 def generate_text_gpt2(prompt, model, tokenizer):
@@ -105,11 +95,20 @@ elif format_type == "llama2-7b-chat":
 if format_type == "GPT-2":
     model, tokenizer = load_gpt2_model()
 elif format_type == "Gemma-2b-it":
-    try:
-        model, tokenizer = load_gemma_model()
-    except Exception as e:
-        st.error(f"Failed to load Gemma model: {e}")
+    token = st.text_input("Hugging Face Token", type="password")
+    if token:
+        try:
+            model, tokenizer = load_gemma_model(token)
+            st.success("Successfully logged in to Hugging Face and loaded Gemma model")
+        except Exception as e:
+            st.error(f"Failed to load Gemma model: {e}")
+            st.stop()
+    else:
+        st.warning("Please enter your Hugging Face token to load the Gemma model")
         st.stop()
+elif format_type == "llama2-7b-chat":
+    # No token needed for llama2-7b-chat
+    pass
 
 # Define behavior based on model selection
 input_text = st.text_area("Please enter text here... 🙋", height=50)
