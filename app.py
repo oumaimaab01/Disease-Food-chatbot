@@ -6,13 +6,13 @@ from huggingface_hub import login
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from gradientai import Gradient
 
+# Configurer la page Streamlit avant toute autre utilisation de Streamlit
 st.set_page_config(
     page_title="GenAI Magician",
     page_icon="✨",
     layout="centered",
     initial_sidebar_state="auto",
 )
-
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -34,7 +34,6 @@ if token:
     except Exception as e:
         st.error(f"Login failed: {e}")
         st.stop()
-        
 
 # Load GPT-2 model and tokenizer
 @st.cache_resource
@@ -48,8 +47,8 @@ def load_gpt2_model():
 @st.cache_resource
 def load_gemma_model():
     model_name = "google/gemma-2b-it"
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name, progress_bar=False)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, progress_bar=False)
     return model, tokenizer
 
 def generate_text_gpt2(prompt, model, tokenizer):
@@ -91,7 +90,6 @@ main_image = Image.open('static/main_banner.png')
 # Set sidebar images and select box
 format_type = st.sidebar.selectbox('Choose your GenAI magician 😉', ["GPT-2", "Gemma-2b-it", "llama2-7b-chat"])
 
-
 # Set main image and title
 st.image(main_image, use_column_width='auto')
 
@@ -107,7 +105,11 @@ elif format_type == "llama2-7b-chat":
 if format_type == "GPT-2":
     model, tokenizer = load_gpt2_model()
 elif format_type == "Gemma-2b-it":
-    model, tokenizer = load_gemma_model()
+    try:
+        model, tokenizer = load_gemma_model()
+    except Exception as e:
+        st.error(f"Failed to load Gemma model: {e}")
+        st.stop()
 
 # Define behavior based on model selection
 input_text = st.text_area("Please enter text here... 🙋", height=50)
@@ -115,7 +117,6 @@ chat_button = st.button("Do the Magic! ✨")
 
 # Initialize generated_text
 generated_text = ""
-
 
 if chat_button and input_text.strip():
     with st.spinner("Loading...💫"):
@@ -128,7 +129,6 @@ if chat_button and input_text.strip():
             generated_text = get_response_from_llama2(prompt)
 
         st.success(generated_text)
-
 else:
     st.warning("Please enter something! ⚠")
 
