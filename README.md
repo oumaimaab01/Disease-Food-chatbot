@@ -6,7 +6,7 @@ Ce projet vise à développer une plateforme intelligente capable de prédire le
 Le système est particulièrement utile pour les patients souffrant de maladies chroniques comme le diabète, les maladies cardiovasculaires, l'hypertension, les allergies alimentaires, etc., et vise à offrir une assistance dans la gestion des régimes alimentaires personnalisés.
 
 Le projet comprend plusieurs phases clés :
-1. **Collecte de données** via le web scraping.
+1. **Collecte de données** via le web scraping du website https://www.passeportsante.net/.
 2. **Préparation des données** et leur structuration pour entraîner les modèles d'IA.
 3. **Modélisation avec fine-tuning** pour adapter les modèles d'IA à notre cas d'usage.
 4. **Développement d'une interface utilisateur** accessible via une application web.
