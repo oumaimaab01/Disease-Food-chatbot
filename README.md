@@ -19,7 +19,7 @@ Le projet comprend plusieurs phases clés :
 - **Application Web** : Interface conviviale développée avec Streamlit, permettant aux utilisateurs de poser des questions et d'obtenir des recommandations personnalisées.
 - **Déploiement des Modèles** : Hébergement des modèles fine-tunés avec Streamlit pour fournir des réponses en temps réel aux utilisateurs.
 
-## Fine-Tuning des Modèles d'Intelligence Artificielle
+## Fine-Tuning des LLMs
 Le fine-tuning des modèles est une étape essentielle du projet pour adapter les modèles pré-entraînés (tels que GPT-2, LLama 2 et Gemma) aux données spécifiques des interactions entre maladies et aliments. Ce processus améliore la pertinence des réponses fournies par les modèles.
 
 ### Étapes du Fine-Tuning
@@ -54,14 +54,13 @@ Le fine-tuning des modèles est une étape essentielle du projet pour adapter le
 - Accès à un GPU recommandé pour entraîner les modèles (mais pas nécessaire pour l'utilisation en production)
 
 ### Cloner le dépôt
-git clone https://github.com/oumaimaab01/Disease-Food-chatbot.git
-cd Disease-Food-chatbot
+   git clone https://github.com/oumaimaab01/Disease-Food-chatbot.git
 
 ### Installation des dépendances
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 ### Démarrer l'Application Web
-streamlit run app.py
+   streamlit run app.py
 
 
 
